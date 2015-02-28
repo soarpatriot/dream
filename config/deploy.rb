@@ -1,11 +1,11 @@
 lock '3.2.1'
 
-set :application, "dialect-api"
+set :application, "dream"
 
 set :rvm_type, :user
-set :rvm_ruby_version, '2.1.3'
+set :rvm_ruby_version, '2.1.5'
 
-set :repo_url, "git@github.com:soarpatriot/dialect-api.git"
+set :repo_url, "git@github.com:soarpatriot/dream.git"
 # ask :branch, proc { `git rev-parse --abbrev-ref HEAD`.chomp }
 set :branch, "master"
 
@@ -29,7 +29,7 @@ namespace :deploy do
 
     on roles(:app) do
       within current_path do
-        execute :bundle, "exec god start dialect-api"
+        execute :bundle, "exec god start dream"
       end
     end
   end
@@ -39,7 +39,7 @@ namespace :deploy do
 
     on roles(:app) do
       within current_path do
-        execute :bundle, "exec god stop dialect-api"
+        execute :bundle, "exec god stop dream"
       end
     end
   end

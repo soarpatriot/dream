@@ -14,10 +14,10 @@ require "#{app_path}/lib/god_restart_file.rb"
   God.watch do |w|
     port = "603#{id}"
 
-    w.group    = "dialect-api"
+    w.group    = "dream"
     w.log      = "<%= shared_path %>/log/god.log"
 
-    w.name     = "dialect-api-#{port}"
+    w.name     = "dream-#{port}"
     w.interval = 60.seconds
 
     pid_path = "#{app_path}/tmp/pids/goliath.#{port}.pid"
