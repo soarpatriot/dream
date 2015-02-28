@@ -2,7 +2,7 @@ zh-CN:
   activerecord:
       models:
         user: "用户"
-
+        comment: "评论"
       attributes:
 
         user:
@@ -11,7 +11,8 @@ zh-CN:
           email: "email"
           password: "密码"
           password_confirmation:  "确认密码"
-
+        comment:
+          content: "内容"
       errors:
         template:
           header:

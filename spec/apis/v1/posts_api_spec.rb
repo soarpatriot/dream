@@ -12,13 +12,13 @@ describe V1::PostsApi do
 
     it "fail" do
       res = auth_json_post post_path, content:"sss"
-      expect(res[:error]).to eq("image is missing, sound is missing")
+      expect(res[:error]).to eq("dream is missing, reality is missing")
     end
 
     it "succes" do
-      image = File.open("#{G2.config.root_dir}/app/assets/images/day3.jpg")
-      sound = File.open("#{G2.config.root_dir}/app/assets/sound/xiatian.mp3")
-      res = auth_json_post post_path, content:"sss", image:image, sound:sound
+      dream = "test"
+      reality = "test"      
+      res = auth_json_post post_path, percentage:"20", dream:dream, reality:reality
       expect(res[:code]).to eq(0)
     end
 

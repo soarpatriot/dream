@@ -10,7 +10,7 @@ class V1::PostsApi < Grape::API
 
   resources :posts do
 
-    desc "获得sound list", {
+    desc "获得post list", {
         entity: PostEntity
     }
     params do
@@ -22,16 +22,16 @@ class V1::PostsApi < Grape::API
     end
 
 
-    desc "上传声音", {
+    desc "发表post", {
 
     }
     params do
-      requires :image , desc: "图片文件"
-      requires :sound, desc: "声音文件"
-      optional :content, desc: "内容"
+      requires :dream , desc: "dream"
+      requires :reality, desc: "reality"
+      optional :percentage, desc: "finish percentage"
     end
     post  do
-      post = Post.create image:params[:image], sound:params[:sound], content:params[:content], user:current_user
+      post = Post.create dream:params[:dream], reality:params[:reality], percentage:params[:percentage], user:current_user
       error! post.errors.full_messages.join(","), 400 unless post.persisted?
       success_result
     end
