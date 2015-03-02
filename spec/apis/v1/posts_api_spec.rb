@@ -18,7 +18,7 @@ describe V1::PostsApi do
     it "succes" do
       dream = "test"
       reality = "test"      
-      res = auth_json_post post_path, percentage:"20", dream:dream, reality:reality
+      res = auth_json_post post_path, percentage:20, dream:dream, reality:reality
       expect(res[:code]).to eq(0)
     end
 
