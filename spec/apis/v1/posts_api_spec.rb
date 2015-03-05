@@ -6,6 +6,11 @@ describe V1::PostsApi do
   def comments_path post
     "/v1/posts/#{post.id}/comments"
   end
+  
+  def diaries_path post
+    "/v1/posts/#{post.id}/diaries"
+  end
+
 
 
   context "create a post" do
@@ -95,5 +100,38 @@ describe V1::PostsApi do
       expect(res[:data].size).to eq(1)
     end
   end
+
+  context "diaries list" do
+
+    it "list more page" do
+      post = create :post
+      create_list :diary, 10, post:post,user:current_user
+      res = auth_json_get diaries_path(post)
+
+      expect(res[:has_more]).to eq(true)
+      expect(res[:data].size).to eq(2)
+    end
+
+    it "list more page, before" do
+      post = create :post
+      create_list :diary, 10, post:post,user:current_user
+      diary = create :diary, post:post,user:current_user
+      res = auth_json_get diaries_path(post), before: diary.id
+
+      expect(res[:has_more]).to eq(true)
+      expect(res[:data].size).to eq(2)
+    end
+
+    it "list more page, before only one" do
+      post = create :post
+      create_list :diary, 1, post:post,user:current_user
+      diary = create :diary, post:post,user:current_user
+      res = auth_json_get diaries_path(post), before: diary.id
+
+      expect(res[:has_more]).to eq(false)
+      expect(res[:data].size).to eq(1)
+    end
+  end
+
 
 end

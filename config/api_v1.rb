@@ -25,9 +25,11 @@ class ApiV1 < Grape::API
 
   helpers PostHelper
   helpers CommentHelper
+  helpers DiaryHelper
   helpers AccessHelper
   helpers LocaleHelper
   helpers ApplicationHelper
+ 
 
   mount V1::UserApi
   mount V1::PostsApi

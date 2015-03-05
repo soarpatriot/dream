@@ -47,6 +47,19 @@ class V1::PostsApi < Grape::API
       post = Post.find(params[:id])
       comment_page post.comments, params[:before]
     end
+   
+    desc "获得 diaries list", {
+        entity: DiaryEntity
+    }
+    params do
+      requires :id,type:Integer, desc: "id"
+      optional :before,type:Integer, desc: "dirary id"
+    end
+    get ":id/diaries" do
+      post = Post.find(params[:id])
+      diary_page post.diaries, params[:before]
+    end
+
 
   end
 
