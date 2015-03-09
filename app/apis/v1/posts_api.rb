@@ -1,12 +1,7 @@
 class V1::PostsApi < Grape::API
 
 
-  before do
-    token_authenticate!
-  end
-  params do
-    requires :auth_token, type: String
-  end
+
 
   resources :posts do
 
@@ -23,14 +18,15 @@ class V1::PostsApi < Grape::API
 
 
     desc "发表post", {
-
     }
     params do
       requires :dream , desc: "dream"
       requires :reality, desc: "reality"
       optional :percentage, desc: "finish percentage"
+      requires :auth_token, type: String
     end
     post  do
+      token_authenticate!
       post = Post.create dream:params[:dream], reality:params[:reality], percentage:params[:percentage], user:current_user
       error! post.errors.full_messages.join(","), 400 unless post.persisted?
       success_result

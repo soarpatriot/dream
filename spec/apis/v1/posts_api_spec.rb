@@ -43,7 +43,7 @@ describe V1::PostsApi do
     it "list one page" do
       create_list :post, 1
 
-      res = auth_json_get post_path
+      res = json_get post_path
 
       expect(res[:has_more]).to eq(false)
       expect(res[:data].size).to eq(1)
@@ -52,7 +52,7 @@ describe V1::PostsApi do
     it "list before " do
       create_list :post, 3
       post = create :post
-      res = auth_json_get post_path, before: post.id
+      res = json_get post_path, before: post.id
 
       expect(res[:has_more]).to eq(true)
       expect(res[:data].size).to eq(2)
@@ -61,7 +61,7 @@ describe V1::PostsApi do
     it "list before no more " do
       create_list :post, 1
       post = create :post
-      res = auth_json_get post_path, before: post.id
+      res = json_get post_path, before: post.id
 
       expect(res[:has_more]).to eq(false)
       expect(res[:data].size).to eq(1)
@@ -74,7 +74,7 @@ describe V1::PostsApi do
     it "list more page" do
       post = create :post
       create_list :comment, 10, post:post
-      res = auth_json_get comments_path(post)
+      res = json_get comments_path(post)
 
       expect(res[:has_more]).to eq(true)
       expect(res[:data].size).to eq(2)
@@ -84,7 +84,7 @@ describe V1::PostsApi do
       post = create :post
       create_list :comment, 10, post:post
       comment = create :comment, post:post
-      res = auth_json_get comments_path(post), before: comment.id
+      res = json_get comments_path(post), before: comment.id
 
       expect(res[:has_more]).to eq(true)
       expect(res[:data].size).to eq(2)
@@ -94,7 +94,7 @@ describe V1::PostsApi do
       post = create :post
       create_list :comment, 1, post:post
       comment = create :comment, post:post
-      res = auth_json_get comments_path(post), before: comment.id
+      res = json_get comments_path(post), before: comment.id
 
       expect(res[:has_more]).to eq(false)
       expect(res[:data].size).to eq(1)
@@ -106,7 +106,7 @@ describe V1::PostsApi do
     it "list more page" do
       post = create :post
       create_list :diary, 10, post:post,user:current_user
-      res = auth_json_get diaries_path(post)
+      res = json_get diaries_path(post)
 
       expect(res[:has_more]).to eq(true)
       expect(res[:data].size).to eq(2)
@@ -116,7 +116,7 @@ describe V1::PostsApi do
       post = create :post
       create_list :diary, 10, post:post,user:current_user
       diary = create :diary, post:post,user:current_user
-      res = auth_json_get diaries_path(post), before: diary.id
+      res = json_get diaries_path(post), before: diary.id
 
       expect(res[:has_more]).to eq(true)
       expect(res[:data].size).to eq(2)
@@ -126,7 +126,7 @@ describe V1::PostsApi do
       post = create :post
       create_list :diary, 1, post:post,user:current_user
       diary = create :diary, post:post,user:current_user
-      res = auth_json_get diaries_path(post), before: diary.id
+      res = json_get diaries_path(post), before: diary.id
 
       expect(res[:has_more]).to eq(false)
       expect(res[:data].size).to eq(1)
