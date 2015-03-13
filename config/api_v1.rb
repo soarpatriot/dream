@@ -35,7 +35,9 @@ class ApiV1 < Grape::API
   mount V1::PostsApi
   mount V1::CommentsApi
   mount V1::DiariesApi
+  mount V1::VotesApi
   add_swagger_documentation  api_version:"v1", base_path: Settings.host
+
   #add_swagger_documentation
   # add_swagger_documentation api_version: "v1", markdown: true
   # add_swagger_documentation api_version: "v2", markdown: true
