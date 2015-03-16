@@ -24,7 +24,9 @@ describe V1::UserApi do
 
     it "succes" do
       image = File.open("#{G2.config.root_dir}/app/assets/images/day3.jpg")
-      res = json_auto_post update_profile_path, avatar: image
+      user = create :user, name:"aa",password:"bb"
+      res = auth_data_post update_profile_path, avatar: image
+      binding.pry
       # expect(res[:code]).to eq(0)
     end
 

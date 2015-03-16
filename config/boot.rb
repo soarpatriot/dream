@@ -37,6 +37,7 @@ require "restclient"
 #require "devise"
 require "carrierwave"
 require "mini_magick"
+require 'carrierwave-qiniu'
 require "acts_as_votable"
 require "acts_as_tree"
 
