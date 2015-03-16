@@ -4,6 +4,7 @@ describe V1::UserApi do
 
   let(:login_path) { "/v1/user/login" }
   let(:register_path) { "/v1/user/register" }
+  let(:update_profile_path) { "/v1/user/update_profile" }
 
 
   context "register" do
@@ -18,6 +19,17 @@ describe V1::UserApi do
     end
 
   end
+  
+  context "update profile" do
+
+    it "succes" do
+      image = File.open("#{G2.config.root_dir}/app/assets/images/day3.jpg")
+      res = json_auto_post update_profile_path, avatar: image
+      # expect(res[:code]).to eq(0)
+    end
+
+  end
+
 
   context "login" do
     it "fail" do

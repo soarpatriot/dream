@@ -8,4 +8,5 @@ class User < ActiveRecord::Base
   validates :name, :password_digest, presence:true
   validates :name,  uniqueness: true
 
+  mount_uploader :avatar, UserAvatarUploader
 end

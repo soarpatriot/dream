@@ -7,7 +7,7 @@ app_dir = File.join(root_dir, "app")
 $LOAD_PATH.unshift root_dir
 $LOAD_PATH.unshift app_dir
 
-%w{apis helpers mailers models entities}.each do |dir|
+%w{apis helpers mailers models entities uploaders}.each do |dir|
   $LOAD_PATH.unshift File.join(app_dir, dir)
 end
 %w{config lib}.each do |dir|

@@ -31,6 +31,7 @@ gem 'bcrypt'
 gem 'delete_paranoid'
 gem 'mini_magick'
 gem 'carrierwave', :require => %w(carrierwave carrierwave/orm/activerecord)
+gem 'carrierwave-qiniu'
 
 group :production do
   gem 'goliath'

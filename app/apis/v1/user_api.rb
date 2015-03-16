@@ -18,6 +18,27 @@ class V1::UserApi < Grape::API
 
       success_result
     end
+    
+    
+    desc "更新用户信息", {
+      entity: UserEntity
+    }
+    params do
+      requires :avatar
+      requires :auth_token, type: String
+    end
+    post "update_profile" do
+      token_authenticate!
+      user_params = {}
+      user_params[:avatar] = params[:avatar]
+
+      current_user.udpate user_params
+
+      present current_user, with: UserEntity
+      
+    end
+    
+
 
     desc "用户登陆", {
       entity: UserEntity
