@@ -32,11 +32,7 @@ class V1::UserApi < Grape::API
       user_params = {}
       user_params[:avatar] = params[:avatar]
       
-      current_user.avatar = params[:avatar]
-      current_user.save!
-      # current_user.update user_params
-
-      present current_user, with: UserEntity
+      current_user.update! user_params
       
     end
     

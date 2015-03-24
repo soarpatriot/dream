@@ -40,6 +40,12 @@ module RackTestHelpers
     JSON.parse last_response.body, symbolize_names: true
   end
 
+  def data_post url, data={}
+    post url, data.merge(auth_token: current_token.value)
+    last_response
+  end
+
+
 
   def auth_json_put url, data={}
     put url, data.merge(auth_token: current_token.value)
