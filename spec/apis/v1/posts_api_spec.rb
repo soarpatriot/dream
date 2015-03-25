@@ -3,6 +3,12 @@ require "spec_helper"
 describe V1::PostsApi do
 
   let(:post_path) { "/v1/posts" }
+  
+  def get_post_path post
+    "/v1/posts/#{post.id}"
+  end
+  
+
   def comments_path post
     "/v1/posts/#{post.id}/comments"
   end
@@ -28,6 +34,21 @@ describe V1::PostsApi do
     end
 
   end
+  
+  context "get a post" do
+
+    it "succes" do
+      
+      dream = "test"
+      reality = "test"      
+
+      post = create :post, dream: dream, reality: reality 
+      res = json_get get_post_path(post)
+      expect(res[:dream]).to eq(dream)
+    end
+
+  end
+
 
   context "posts list" do
 

@@ -1,8 +1,5 @@
 class V1::PostsApi < Grape::API
 
-
-
-
   resources :posts do
 
     desc "获得post list", {
@@ -15,6 +12,18 @@ class V1::PostsApi < Grape::API
       posts = Post.all
       post_page posts, params[:before]
     end
+    
+    desc "获得单个post ", {
+        entity: PostEntity
+    }
+    params do
+      requires :id ,type:Integer, desc: "id"
+    end
+    get "/:id" do
+      post = Post.find(params[:id])
+      present post, with: PostEntity
+    end
+
 
 
     desc "发表post", {
