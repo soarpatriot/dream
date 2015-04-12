@@ -8,4 +8,12 @@ class PostEntity < Grape::Entity
        instance.created_at.to_i
   end
   
+  expose :voted,       documentation: {required: true, type: "Boolean", desc: "是否投票"} do |instance,options |
+       if options[:current_user]
+         options[:current_user].voted_up_on? instance
+       else
+         false 
+       end
+  end
+  
 end

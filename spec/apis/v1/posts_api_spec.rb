@@ -87,6 +87,21 @@ describe V1::PostsApi do
       expect(res[:has_more]).to eq(false)
       expect(res[:data].size).to eq(1)
     end
+    
+    it "list voted " do
+      post1 = create :post
+      create_list :post, 1
+      post = create :post
+      user = create :user 
+      post.up_by user     
+      post1.up_by user     
+      auth_token = create :auth_token, user:user
+      res = json_get post_path,auth_token: auth_token.value
+      
+      expect(res[:data][0][:voted]).to eq(true)
+      expect(res[:data][1][:voted]).to eq(false)
+    end
+ 
   end
 
 

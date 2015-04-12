@@ -16,7 +16,7 @@ module PostHelper
       posts = posts.limit(Settings.paginate_per_page)
     end
 
-    present posts, with: PostEntity
+    present posts, with: PostEntity, current_user: current_user
     body( { has_more: has_more, data: body() })
   end
 
