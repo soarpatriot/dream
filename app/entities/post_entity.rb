@@ -4,6 +4,14 @@ class PostEntity < Grape::Entity
   expose :dream, documentation: {required: true, type: "String", desc:"image url"}
   expose :reality, documentation: {required: true, type: "String", desc:"sound url"}
   expose :percentage, documentation: {required: true, type: "String", desc:"文字内容"}
+  
+  expose :user_avatar, documentation: {required: true, type: "String", desc:"用户头像"} do |instance|
+    instance.user.try(:image_url)
+  end
+  expose :user_name, documentation: {required: true, type: "String", desc:"用户姓名"} do |instance|
+    instance.user.try(:name)
+  end
+
   expose :created_at,       documentation: {required: true, type: "Integer", desc: "创建时间"} do |instance|
        instance.created_at.to_i
   end
