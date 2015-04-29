@@ -68,6 +68,18 @@ class V1::UserApi < Grape::API
       token_authenticate!
     end
 
-  end
 
+    desc "list post"
+    params do
+      requires :id, type: Integer
+      optional :before,type:Integer, desc: "post id"
+    end
+    get ":id/posts" do
+      user = User.find(params[:id])
+      posts = user.posts
+      post_page posts, params[:before]
+            
+    end
+
+  end
 end

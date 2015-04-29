@@ -5,7 +5,10 @@ describe V1::UserApi do
   let(:login_path) { "/v1/user/login" }
   let(:register_path) { "/v1/user/register" }
   let(:update_profile_path) { "/v1/user/update_profile" }
-
+  
+  def user_posts_path user 
+    "/v1/user/#{user.id}/posts"
+  end
 
   context "register" do
     it "fails without mobile_number or password or register_code or nickname" do
@@ -51,7 +54,25 @@ describe V1::UserApi do
       expect(res[:name]).to eq(user.name)
     end
   end
-
-
+ 
+  context "user posts" do 
+    it "list" do 
+      user = create :user
+      posts = create_list :post, 10, user: user
+      res = json_get user_posts_path(user)
+      expect(res[:data].size).to eq(2)
+      expect(res[:has_more]).to eq(true)
+    end
+   
+    it "before" do 
+      user = create :user
+      posts = create_list :post, 2, user: user
+      post = create :post, user: user
+      res = json_get user_posts_path(user), before: post.id
+      expect(res[:data].size).to eq(2)
+      expect(res[:has_more]).to eq(false)
+    end
+ 
+  end
 
 end
