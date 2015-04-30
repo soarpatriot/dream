@@ -14,8 +14,9 @@ class UserAvatarUploader < CarrierWave::Uploader::Base
   self.qiniu_protocol      = "http"
   self.qiniu_can_overwrite = true
 
-  def store_dir
-    ""
+
+  def store_path
+    filename
   end
   # def store_dir
   #   "#{G2.config.root_dir}/public/uploads/#{model.class.to_s.underscore}/#{mounted_as}/#{model.id}"
