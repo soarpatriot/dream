@@ -9,6 +9,9 @@ describe V1::UserApi do
   def user_posts_path user 
     "/v1/user/#{user.id}/posts"
   end
+  def user_profile_path user
+    "v1/user/#{user.id}/profile"
+  end 
 
   context "register" do
     it "fails without mobile_number or password or register_code or nickname" do
@@ -23,6 +26,14 @@ describe V1::UserApi do
 
   end
   
+  context "update profile" do
+    it "get user profile" do 
+       user = create :user 
+       res = json_get user_profile_path user 
+       expect(res[:id]).to eq user.id       
+    end
+  end
+
   context "update profile" do
 
     it "succes" do

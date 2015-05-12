@@ -31,12 +31,20 @@ class V1::UserApi < Grape::API
       token_authenticate!
       user_params = {}
       user_params[:avatar] = params[:avatar]
-      
       current_user.update! user_params
       
     end
-    
-
+   
+    desc "获得用户信息", {
+      entity: UserEntity
+    }
+    params do
+      requires :id, type: Integer
+    end
+    get ":id/profile" do
+      user = User.find(params[:id]) 
+      present user, with: UserEntity
+    end
 
     desc "用户登陆", {
       entity: UserEntity
