@@ -16,11 +16,11 @@ describe V1::UserApi do
   context "register" do
     it "fails without mobile_number or password or register_code or nickname" do
       res = json_post register_path
-      expect(res[:error]).to eq("name is missing, password is missing")
+      expect(res[:error]).to eq("mobile_number is missing, name is missing, password is missing")
     end
 
     it "succes" do
-      res = json_post register_path, name:"aaa", password:"bbb"
+      res = json_post register_path, name:"aaa", password:"bbb", mobile_number:"18603331140"
       expect(res[:code]).to eq(0)
     end
 

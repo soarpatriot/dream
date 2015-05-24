@@ -6,6 +6,7 @@ class V1::UserApi < Grape::API
       entity: UserEntity
     }
     params do
+      requires :mobile_number, type: String
       requires :name, type: String
       requires :password, type: String
     end
@@ -13,7 +14,7 @@ class V1::UserApi < Grape::API
       user = User.where(name: params[:name]).first
       locale_error! "user_exsisted", 400 unless user.nil?
 
-      user = User.create name: params[:name], password: params[:password]
+      user = User.create name: params[:name], password: params[:password], mobile_number: params[:mobile_number]
       error! user.errors.full_messages.join(","), 400 unless user.persisted?
 
       success_result
