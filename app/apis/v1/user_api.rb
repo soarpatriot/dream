@@ -51,11 +51,11 @@ class V1::UserApi < Grape::API
       entity: UserEntity
     }
     params do
-      requires :name, type: String
+      requires :mobile_number, type: String
       requires :password,      type: String
     end
     post "login" do
-      user = User.where(name: params[:name]).first
+      user = User.where(mobile_number: params[:mobile_number]).first
 
       locale_error! "user_not_exist", 401 unless user
 
