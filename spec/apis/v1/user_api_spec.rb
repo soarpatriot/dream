@@ -21,7 +21,7 @@ describe V1::UserApi do
 
     it "succes" do
       res = json_post register_path, name:"aaa", password:"bbb", mobile_number:"18603331140"
-      expect(res[:code]).to eq(0)
+      expect(res[:name]).to eq("aaa")
     end
 
   end

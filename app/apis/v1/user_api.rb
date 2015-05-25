@@ -16,8 +16,11 @@ class V1::UserApi < Grape::API
 
       user = User.create name: params[:name], password: params[:password], mobile_number: params[:mobile_number]
       error! user.errors.full_messages.join(","), 400 unless user.persisted?
+      
+      user.update auth_token: AuthToken.create
 
-      success_result
+      present user, with: UserEntity, token: user.auth_token.value
+ 
     end
     
     
