@@ -34,14 +34,17 @@ module RackTestHelpers
   end
 
   def auth_data_post url, data={}
-    post url, data.merge(auth_token: current_token.value)
+    token_hash = {auth_token:current_token.val}
+    post url, token_hash.merge(data)
     p last_response.body
     p last_response.headers
     JSON.parse last_response.body, symbolize_names: true
   end
 
   def data_post url, data={}
-    post url, data.merge(auth_token: current_token.value)
+    
+    post url, data
+    
     last_response
   end
 

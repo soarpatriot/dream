@@ -39,10 +39,17 @@ describe V1::UserApi do
     it "succes" do
       image = File.open("#{G2.config.root_dir}/app/assets/images/day3.jpg")
       user = create :user, name:"aa",password:"bb"
+      name = "bb"
       auth_token = create :auth_token, user: user 
+      res = data_post update_profile_path, auth_token:auth_token.value, avatar: image ,name:name
       
-      res = data_post update_profile_path, auth_token:auth_token.value, avatar: image
-     expect(res.status).to eq(201)
+      user0 = user.reload
+
+      user1 = User.where(name:"aa").first
+     
+      expect(user1).to eq(nil)
+      expect(user0.name).to eq(name)
+      expect(res.status).to eq(201)
     end
 
   end

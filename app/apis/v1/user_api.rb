@@ -28,13 +28,15 @@ class V1::UserApi < Grape::API
       entity: UserEntity
     }
     params do
-      requires :avatar
+      optional :avatar
+      optional :name, type:String, desc: "name"
       requires :auth_token, type: String
     end
     post "update_profile" do
       token_authenticate!
       user_params = {}
-      user_params[:avatar] = params[:avatar]
+      user_params[:avatar] = params[:avatar] unless params[:avatar].nil?
+      user_params[:name] = params[:name] unless params[:name].nil?
       current_user.update! user_params
       
     end
